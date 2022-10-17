@@ -40,3 +40,8 @@
 .hide{
   opacity: 0;
 }
+
+.my-btn{
+    border: none;
+    background-color: transparent;
+}

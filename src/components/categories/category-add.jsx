@@ -1,5 +1,7 @@
 import { Formik, Form, Field } from 'formik';
 import React from 'react';
+import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 const CategoryAdd = () => {
 
@@ -11,18 +13,20 @@ const CategoryAdd = () => {
         return error;
     }
 
+    const navigate = useNavigate();
+
 
     return (
         <div className='container'>
             <h2>Adding Category</h2>
             <Formik
                 initialValues={{ name: '', }}
-                onSubmit={async (values) => {
-                    await new Promise((r) => setTimeout(r, 500));
-                    alert(JSON.stringify(values, null, 2));
+                onSubmit={(values) => {
+                    axios.post('http://laravelreact/api/categories', values);
+                    navigate('/')
                 }}
             >
-                {({ errors, touched, isValidating }) => (
+                {({ errors, touched }) => (
                     <Form className='needs-validation'>
                         <label htmlFor="name" className="form-label">Category Name:</label>
                         <Field
@@ -52,5 +56,4 @@ const CategoryAdd = () => {
     );
 }
 
-//((touched.name && errors.name) ? 'is-invalid' : 'is-valid')
 export default CategoryAdd;

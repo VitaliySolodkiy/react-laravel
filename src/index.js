@@ -1,17 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import 'bootstrap/dist/css/bootstrap.css';
+
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import CategoryAdd from './components/categories/category-add';
+import CategoryList from './components/categories/category-list';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route path="/" element={<CategoryList />}></Route>
+          <Route path="category-add" element={<CategoryAdd />}></Route>
+          <Route path="*" element={<h1>404</h1>}></Route>
+        </Route>
+      </Routes>
     </BrowserRouter>
   </React.StrictMode>
 );
